@@ -12,24 +12,19 @@ import org.json.JSONObject;
 public class PostmanEchoTest {
 
     @Test
-    void shouldSendRequestPostTest() {
-        // Given - When - Then
-        // Предусловия
+    void sendingRequest() {
         given()
                 .baseUri("https://postman-echo.com")
-                .body("Test") // отправляемые данные (заголовки и query можно выставлять аналогично)
-                // Выполняемые действия
+                .body("Test")
                 .when()
                 .post("/post")
-                // Проверки
                 .then()
                 .statusCode(200)
                 .body("data", equalTo("Test"));
     }
 
-    //пробуем вернуть POST-запрос с объектом
     @Test
-    void shouldSendRequestPostWithParam() {
+    void SendPostRequest() {
         JSONObject requestBody = new JSONObject()
                 .put("name", "test name")
                 .put("age", 18)
@@ -45,9 +40,8 @@ public class PostmanEchoTest {
                 .body("data", containsString("test name"));
     }
 
-    //пробуем вернуть GET-запрос (пример с параметрами)
     @Test
-    void shouldReturnGet() {
+    void returnGet() {
         given()
                 .baseUri("https://postman-echo.com")
                 .param("foo1", "bar1")
@@ -62,9 +56,8 @@ public class PostmanEchoTest {
                 .body("headers.x-forwarded-proto", equalTo("https"));
     }
 
-    //пробуем вернуть POST-запрос на хедер
     @Test
-    void shouldRequestHeaders() {
+    void requestingHeaders() {
         given()
                 .baseUri("https://postman-echo.com")
                 .contentType("text/plain; charset=UTF-8")
